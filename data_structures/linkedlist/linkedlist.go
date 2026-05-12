@@ -3,16 +3,22 @@ package linkedlist
 import "fmt"
 
 func (ll *LinkedList[T]) Push(value T) {
-	newNode := Node[T]{Value: value, Next: nil}
-	if ll.Head == nil {
-		ll.Head = &newNode
-		return
+	// newNode := Node[T]{Value: value, Next: nil}
+	// if ll.Head == nil {
+	// 	ll.Head = &newNode
+	// 	return
+	// }
+	// current := ll.Head
+	// for current.Next != nil {
+	// 	current = current.Next
+	// }
+	// current.Next = &newNode
+
+	currentPtr := &ll.Head
+	for *currentPtr != nil {
+		currentPtr = &(*currentPtr).Next
 	}
-	current := ll.Head
-	for current.Next != nil {
-		current = current.Next
-	}
-	current.Next = &newNode
+	*currentPtr = &Node[T]{Value: value, Next: nil}
 }
 
 func (ll *LinkedList[T]) ToSlice() []T {
